@@ -102,6 +102,15 @@ export default defineType({
         'Optional. If filled along with Goals, the project page will render as a full case study. Leave empty for a simple gallery page. Separate paragraphs with a blank line.',
       group: 'caseStudy',
     }),
+    defineField({
+      name: 'introPhotos',
+      title: 'Photos: After Intro',
+      type: 'array',
+      of: [{type: 'image', options: {hotspot: true}}],
+      description:
+        'Optional. Process photos shown between the Intro and the Goals section. Best for "before" / original-state photos. Drag multiple files from Finder at once. 2 to 6 photos works best visually.',
+      group: 'caseStudy',
+    }),
 
     // ── Goals subgroup ──
     defineField({
@@ -135,6 +144,15 @@ export default defineType({
       rows: 4,
       description:
         'Optional. Paragraphs displayed after the numbered list, before the next section. Separate paragraphs with a blank line.',
+      group: 'caseStudy',
+    }),
+    defineField({
+      name: 'goalsPhotos',
+      title: 'Photos: After Goals',
+      type: 'array',
+      of: [{type: 'image', options: {hotspot: true}}],
+      description:
+        'Optional. Process photos shown between Goals and Design Decisions. Best for demolition / early-progress photos. 2 to 6 photos works best.',
       group: 'caseStudy',
     }),
 
@@ -181,6 +199,15 @@ export default defineType({
         },
       ],
     }),
+    defineField({
+      name: 'designDecisionsPhotos',
+      title: 'Photos: After Design Decisions',
+      type: 'array',
+      of: [{type: 'image', options: {hotspot: true}}],
+      description:
+        'Optional. Process photos shown between Design Decisions and Before/After. Best for rough construction / framing / electrical / plumbing photos. 4 to 8 photos works best.',
+      group: 'caseStudy',
+    }),
 
     // ── Before / After subgroup ──
     defineField({
@@ -219,6 +246,15 @@ export default defineType({
         },
       ],
     }),
+    defineField({
+      name: 'beforeAfterPhotos',
+      title: 'Photos: After Before / After Table',
+      type: 'array',
+      of: [{type: 'image', options: {hotspot: true}}],
+      description:
+        'Optional. Process photos shown between the Before/After table and the Result section. Best for finishes-going-in photos (cabinets installed, countertops, tile work). 2 to 6 photos works best.',
+      group: 'caseStudy',
+    }),
 
     // ── Result subgroup ──
     defineField({
@@ -234,6 +270,24 @@ export default defineType({
       type: 'text',
       rows: 5,
       description: 'Optional. Final paragraphs about the result.',
+      group: 'caseStudy',
+    }),
+
+    // ── Final Result Gallery ──
+    defineField({
+      name: 'finalGalleryHeading',
+      title: 'Final Gallery: Heading',
+      type: 'string',
+      description: 'Optional. Overrides the default "The Finished Space" heading shown above the final gallery.',
+      group: 'caseStudy',
+    }),
+    defineField({
+      name: 'finalGallery',
+      title: 'Final Result Gallery',
+      type: 'array',
+      of: [{type: 'image', options: {hotspot: true}}],
+      description:
+        'Photos of the finished space, displayed at the very end of the page in a dedicated gallery. No limit. Drag all your finished kitchen / bathroom photos here. Order in this list = display order on the page.',
       group: 'caseStudy',
     }),
 
