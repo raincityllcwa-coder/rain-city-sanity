@@ -102,12 +102,58 @@ export default defineType({
         'Optional. If filled along with Goals, the project page will render as a full case study. Leave empty for a simple gallery page. Separate paragraphs with a blank line.',
       group: 'caseStudy',
     }),
+
+    // ── Goals subgroup ──
+    defineField({
+      name: 'goalsHeading',
+      title: 'Goals: Heading',
+      type: 'string',
+      description: 'Optional. Overrides the default "The Project Goals" heading.',
+      group: 'caseStudy',
+    }),
+    defineField({
+      name: 'goalsIntro',
+      title: 'Goals: Intro Paragraphs',
+      type: 'text',
+      rows: 4,
+      description:
+        'Optional. Paragraphs displayed under the Goals heading, before the numbered list. Separate paragraphs with a blank line.',
+      group: 'caseStudy',
+    }),
     defineField({
       name: 'goals',
       title: 'Project Goals (numbered list)',
       type: 'array',
       of: [{type: 'string'}],
       description: 'Optional. Each item is one goal of the project.',
+      group: 'caseStudy',
+    }),
+    defineField({
+      name: 'goalsOutro',
+      title: 'Goals: Outro Paragraphs',
+      type: 'text',
+      rows: 4,
+      description:
+        'Optional. Paragraphs displayed after the numbered list, before the next section. Separate paragraphs with a blank line.',
+      group: 'caseStudy',
+    }),
+
+    // ── Design Decisions subgroup ──
+    defineField({
+      name: 'designDecisionsHeading',
+      title: 'Design Decisions: Heading',
+      type: 'string',
+      description:
+        'Optional. Overrides the default "The Design Choices That Made the Space Work" heading.',
+      group: 'caseStudy',
+    }),
+    defineField({
+      name: 'designDecisionsIntro',
+      title: 'Design Decisions: Intro Paragraphs',
+      type: 'text',
+      rows: 4,
+      description:
+        'Optional. Paragraphs displayed under the section heading, before the individual design decision blocks.',
       group: 'caseStudy',
     }),
     defineField({
@@ -135,6 +181,23 @@ export default defineType({
         },
       ],
     }),
+
+    // ── Before / After subgroup ──
+    defineField({
+      name: 'beforeAfterHeading',
+      title: 'Before / After: Heading',
+      type: 'string',
+      description: 'Optional. Overrides the default "What We Replaced and Upgraded" heading.',
+      group: 'caseStudy',
+    }),
+    defineField({
+      name: 'beforeAfterIntro',
+      title: 'Before / After: Intro Paragraphs',
+      type: 'text',
+      rows: 4,
+      description: 'Optional. Paragraphs displayed under the section heading, before the table.',
+      group: 'caseStudy',
+    }),
     defineField({
       name: 'beforeAfter',
       title: 'Before / After Table',
@@ -155,6 +218,15 @@ export default defineType({
           },
         },
       ],
+    }),
+
+    // ── Result subgroup ──
+    defineField({
+      name: 'resultHeading',
+      title: 'Result: Heading',
+      type: 'string',
+      description: 'Optional. Overrides the default "The Result" heading.',
+      group: 'caseStudy',
     }),
     defineField({
       name: 'resultText',
