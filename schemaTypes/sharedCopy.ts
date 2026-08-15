@@ -15,17 +15,6 @@ export default defineType({
         fields: [
           defineField({name: 'title', title: 'Card title', type: 'string'}),
           defineField({name: 'text', title: 'Card text', type: 'text', rows: 4}),
-          defineField({
-            name: 'photos',
-            title: 'Carousel photos',
-            type: 'array',
-            description: 'Auto-rotating photos of this card. Upload, delete, or drag to reorder. Recommended 926x760 or larger, landscape. If left empty, the built-in photo set is used.',
-            of: [{
-              type: 'image',
-              options: {hotspot: true},
-              fields: [defineField({name: 'alt', title: 'Alt Text (SEO)', type: 'string'})],
-            }],
-          }),
         ],
         preview: {select: {title: 'title'}},
       }],
