@@ -5,6 +5,7 @@ export default defineType({
   name: 'homeCopy',
   title: 'Homepage Texts',
   type: 'document',
+  __experimental_actions: ['update', 'publish'],
   fields: [
     defineField({name: 'heroTitle', title: 'Hero H1', type: 'string'}),
     defineField({name: 'heroSubtitle', title: 'Hero subtitle', type: 'text', rows: 2}),

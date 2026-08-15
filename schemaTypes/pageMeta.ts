@@ -7,6 +7,7 @@ export default defineType({
   name: 'pageMeta',
   title: 'Page Meta (SEO)',
   type: 'document',
+  __experimental_actions: ['update', 'publish'],
   fields: [
     defineField({name: 'pageKey', title: 'Page', type: 'string', readOnly: true}),
     defineField({name: 'metaTitle', title: 'Meta title', type: 'string', description: 'Aim for under 60 characters'}),

@@ -6,6 +6,7 @@ export default defineType({
   name: 'serviceCopy',
   title: 'Service Page Texts',
   type: 'document',
+  __experimental_actions: ['update', 'publish'],
   fields: [
     defineField({name: 'serviceKey', title: 'Page', type: 'string', readOnly: true}),
     defineField({name: 'heroTitle', title: 'Hero H1', type: 'string'}),

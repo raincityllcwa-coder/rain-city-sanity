@@ -5,6 +5,7 @@ export default defineType({
   name: 'aboutCopy',
   title: 'About Us Texts',
   type: 'document',
+  __experimental_actions: ['update', 'publish'],
   fields: [
     defineField({name: 'heading', title: 'Section heading', type: 'string'}),
     defineField({name: 'introParagraph1', title: 'Intro paragraph 1', type: 'text', rows: 5}),

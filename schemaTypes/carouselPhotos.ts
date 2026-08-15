@@ -9,6 +9,7 @@ const photoGrid = (name: string, title: string) =>
     name,
     title,
     type: 'array',
+    description: 'Order here = order in the carousel. Drop several files onto the grid to add them at once, hover a photo for the menu to remove it, click a photo to set its alt text. If this grid is emptied completely, the site shows its built-in default photos for this card.',
     options: {layout: 'grid'},
     of: [
       {

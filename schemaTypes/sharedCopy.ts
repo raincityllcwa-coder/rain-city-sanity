@@ -6,6 +6,7 @@ export default defineType({
   name: 'sharedCopy',
   title: 'Shared Section Texts',
   type: 'document',
+  __experimental_actions: ['update', 'publish'],
   fields: [
     defineField({name: 'servicesHeading', title: 'Services grid: heading', type: 'string'}),
     defineField({
