@@ -29,6 +29,7 @@ export default defineType({
       title: 'Main Image',
       type: 'image',
       options: {hotspot: true},
+      fields: [defineField({name: 'alt', title: 'Alt Text (SEO)', type: 'string'})],
       group: 'basic',
       validation: (Rule) => Rule.required(),
     }),
@@ -36,7 +37,7 @@ export default defineType({
       name: 'gallery',
       title: 'Gallery (additional photos)',
       type: 'array',
-      of: [{type: 'image', options: {hotspot: true}}],
+      of: [{type: 'image', options: {hotspot: true}, fields: [defineField({name: 'alt', title: 'Alt Text (SEO)', type: 'string'})]}],
       group: 'basic',
     }),
     defineField({
@@ -106,7 +107,7 @@ export default defineType({
       name: 'introPhotos',
       title: 'Photos: After Intro',
       type: 'array',
-      of: [{type: 'image', options: {hotspot: true}}],
+      of: [{type: 'image', options: {hotspot: true}, fields: [defineField({name: 'alt', title: 'Alt Text (SEO)', type: 'string'})]}],
       description:
         'Optional. Process photos shown between the Intro and the Goals section. Best for "before" / original-state photos. Drag multiple files from Finder at once. 2 to 6 photos works best visually.',
       group: 'caseStudy',
@@ -150,7 +151,7 @@ export default defineType({
       name: 'goalsPhotos',
       title: 'Photos: After Goals',
       type: 'array',
-      of: [{type: 'image', options: {hotspot: true}}],
+      of: [{type: 'image', options: {hotspot: true}, fields: [defineField({name: 'alt', title: 'Alt Text (SEO)', type: 'string'})]}],
       description:
         'Optional. Process photos shown between Goals and Design Decisions. Best for demolition / early-progress photos. 2 to 6 photos works best.',
       group: 'caseStudy',
@@ -203,7 +204,7 @@ export default defineType({
       name: 'designDecisionsPhotos',
       title: 'Photos: After Design Decisions',
       type: 'array',
-      of: [{type: 'image', options: {hotspot: true}}],
+      of: [{type: 'image', options: {hotspot: true}, fields: [defineField({name: 'alt', title: 'Alt Text (SEO)', type: 'string'})]}],
       description:
         'Optional. Process photos shown between Design Decisions and Before/After. Best for rough construction / framing / electrical / plumbing photos. 4 to 8 photos works best.',
       group: 'caseStudy',
@@ -250,7 +251,7 @@ export default defineType({
       name: 'beforeAfterPhotos',
       title: 'Photos: After Before / After Table',
       type: 'array',
-      of: [{type: 'image', options: {hotspot: true}}],
+      of: [{type: 'image', options: {hotspot: true}, fields: [defineField({name: 'alt', title: 'Alt Text (SEO)', type: 'string'})]}],
       description:
         'Optional. Process photos shown between the Before/After table and the Result section. Best for finishes-going-in photos (cabinets installed, countertops, tile work). 2 to 6 photos works best.',
       group: 'caseStudy',
@@ -285,7 +286,7 @@ export default defineType({
       name: 'finalGallery',
       title: 'Final Result Gallery',
       type: 'array',
-      of: [{type: 'image', options: {hotspot: true}}],
+      of: [{type: 'image', options: {hotspot: true}, fields: [defineField({name: 'alt', title: 'Alt Text (SEO)', type: 'string'})]}],
       description:
         'Photos of the finished space, displayed at the very end of the page in a dedicated gallery. No limit. Drag all your finished kitchen / bathroom photos here. Order in this list = display order on the page.',
       group: 'caseStudy',

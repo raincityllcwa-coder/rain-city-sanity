@@ -25,18 +25,27 @@ export default defineType({
       title: 'About Us — Photo 1 (kitchen project)',
       type: 'image',
       options: { hotspot: true },
+      fields: [
+        defineField({ name: 'alt', title: 'Alt Text (SEO)', type: 'string' }),
+      ],
     }),
     defineField({
       name: 'aboutPhoto2',
       title: 'About Us — Photo 2 (team / contractors)',
       type: 'image',
       options: { hotspot: true },
+      fields: [
+        defineField({ name: 'alt', title: 'Alt Text (SEO)', type: 'string' }),
+      ],
     }),
     defineField({
       name: 'aboutPhoto3',
       title: 'About Us — Photo 3 (happy customers)',
       type: 'image',
       options: { hotspot: true },
+      fields: [
+        defineField({ name: 'alt', title: 'Alt Text (SEO)', type: 'string' }),
+      ],
     }),
     defineField({ name: 'companyName', title: 'Company Name', type: 'string' }),
     defineField({ name: 'phone', title: 'Phone', type: 'string' }),
