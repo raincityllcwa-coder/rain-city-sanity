@@ -63,6 +63,12 @@ export default defineType({
       validation: (Rule) => Rule.required().min(1),
     }),
     defineField({
+      name: 'city',
+      title: 'City (optional)',
+      type: 'string',
+      description: 'Example: Kirkland. City pages show reviews from their own city first.',
+    }),
+    defineField({
       name: 'order',
       title: 'Sort Order',
       type: 'number',
