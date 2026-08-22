@@ -1,9 +1,12 @@
 import {defineField, defineType} from 'sanity'
+import {HelpCircleIcon} from '@sanity/icons'
+import {poolNames} from './labels'
 
 export default defineType({
   name: 'faq',
   title: 'FAQ',
   type: 'document',
+  icon: HelpCircleIcon,
   fields: [
     defineField({
       name: 'question',
@@ -25,17 +28,18 @@ export default defineType({
       of: [{type: 'string'}],
       options: {
         list: [
-          {title: '🍳 Kitchen Cabinets', value: 'kitchen-cabinets'},
-          {title: '🪨 Kitchen Countertops', value: 'kitchen-countertops'},
-          {title: '🛁 Bathroom Remodel', value: 'bathroom-remodel'},
+          {title: 'Kitchen Cabinets', value: 'kitchen-cabinets'},
+          {title: 'Kitchen Countertops', value: 'kitchen-countertops'},
+          {title: 'Bathroom Remodel', value: 'bathroom-remodel'},
         ],
       },
       validation: (Rule) => Rule.required().min(1),
     }),
     defineField({
       name: 'order',
-      title: 'Sort Order',
+      title: 'Sort order',
       type: 'number',
+      description: 'Lower numbers show first.',
       initialValue: 0,
     }),
   ],
@@ -50,7 +54,7 @@ export default defineType({
     prepare({title, pages}) {
       return {
         title,
-        subtitle: (pages || []).join(', '),
+        subtitle: poolNames(pages),
       }
     },
   },

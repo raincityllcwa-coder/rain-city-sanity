@@ -1,63 +1,78 @@
 import {defineField, defineType} from 'sanity'
+import {StarIcon} from '@sanity/icons'
+import {poolNames} from './labels'
 
 export default defineType({
   name: 'review',
   title: 'Review',
   type: 'document',
+  icon: StarIcon,
+  groups: [
+    {name: 'content', title: 'Review', default: true},
+    {name: 'placement', title: 'Where it shows'},
+  ],
+  fieldsets: [
+    {name: 'legacy', title: 'Photo links (old way, leave empty)', options: {collapsible: true, collapsed: true}},
+  ],
   fields: [
     defineField({
       name: 'author',
-      title: 'Author Name',
+      title: 'Author name',
       type: 'string',
+      group: 'content',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'text',
-      title: 'Review Text',
+      title: 'Review text',
       type: 'text',
       rows: 4,
+      group: 'content',
       validation: (Rule) => Rule.required(),
-    }),
-
-    // ── Review Photo (URL or upload) ──
-    defineField({
-      name: 'photoUrl',
-      title: 'Photo — paste URL',
-      type: 'url',
-      description: 'Link to work photo (e.g. from Google review)',
     }),
     defineField({
       name: 'photoUpload',
-      title: 'Photo — or upload image',
+      title: 'Photo of the work',
       type: 'image',
+      group: 'content',
       options: {hotspot: true},
-    }),
-
-    // ── Author Avatar (URL or upload) ──
-    defineField({
-      name: 'avatarUrl',
-      title: 'Avatar — paste URL',
-      type: 'url',
-      description: 'Link to reviewer avatar. Leave empty for initials.',
     }),
     defineField({
       name: 'avatarUpload',
-      title: 'Avatar — or upload image',
+      title: 'Reviewer avatar',
       type: 'image',
+      group: 'content',
+      description: 'Leave empty to show initials.',
       options: {hotspot: true},
     }),
-
+    defineField({
+      name: 'photoUrl',
+      title: 'Photo URL',
+      type: 'url',
+      group: 'content',
+      fieldset: 'legacy',
+      description: 'Older way of adding a photo. Upload the photo above instead.',
+    }),
+    defineField({
+      name: 'avatarUrl',
+      title: 'Avatar URL',
+      type: 'url',
+      group: 'content',
+      fieldset: 'legacy',
+      description: 'Older way of adding an avatar. Upload the avatar above instead.',
+    }),
     defineField({
       name: 'showOn',
       title: 'Show on pages',
       type: 'array',
+      group: 'placement',
       of: [{type: 'string'}],
       options: {
         list: [
-          {title: '🏠 Homepage', value: 'homepage'},
-          {title: '🍳 Kitchen Cabinets', value: 'kitchen-cabinets'},
-          {title: '🪨 Kitchen Countertops', value: 'kitchen-countertops'},
-          {title: '🛁 Bathroom Remodel', value: 'bathroom-remodel'},
+          {title: 'Homepage', value: 'homepage'},
+          {title: 'Kitchen Cabinets', value: 'kitchen-cabinets'},
+          {title: 'Kitchen Countertops', value: 'kitchen-countertops'},
+          {title: 'Bathroom Remodel', value: 'bathroom-remodel'},
         ],
       },
       validation: (Rule) => Rule.required().min(1),
@@ -66,29 +81,36 @@ export default defineType({
       name: 'city',
       title: 'City (optional)',
       type: 'string',
+      group: 'placement',
       description: 'Example: Kirkland. City pages show reviews from their own city first.',
     }),
     defineField({
       name: 'order',
-      title: 'Sort Order',
+      title: 'Sort order',
       type: 'number',
+      group: 'placement',
       initialValue: 0,
+      description: 'Lower numbers show first.',
     }),
   ],
   orderings: [
-    {title: 'Sort Order', name: 'orderAsc', by: [{field: 'order', direction: 'asc'}]},
+    {title: 'Sort order', name: 'orderAsc', by: [{field: 'order', direction: 'asc'}]},
   ],
   preview: {
     select: {
       title: 'author',
-      subtitle: 'text',
-      media: 'photoUpload',
+      text: 'text',
+      pages: 'showOn',
+      city: 'city',
+      avatar: 'avatarUpload',
+      photo: 'photoUpload',
     },
-    prepare({title, subtitle, media}) {
+    prepare({title, text, pages, city, avatar, photo}) {
+      const where = [city, poolNames(pages)].filter(Boolean).join(' · ')
       return {
         title,
-        subtitle: (subtitle || '').slice(0, 60) + '...',
-        media,
+        subtitle: where || (text || '').slice(0, 60),
+        media: avatar || photo,
       }
     },
   },

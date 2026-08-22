@@ -1,9 +1,12 @@
 import {defineField, defineType} from 'sanity'
+import {ImagesIcon} from '@sanity/icons'
+import {poolNames} from './labels'
 
 export default defineType({
   name: 'project',
   title: 'Project',
   type: 'document',
+  icon: ImagesIcon,
   groups: [
     {name: 'basic', title: 'Basic Info', default: true},
     {name: 'caseStudy', title: 'Case Study (optional)'},
@@ -48,19 +51,19 @@ export default defineType({
       group: 'basic',
       options: {
         list: [
-          {title: '🏠 Homepage', value: 'homepage'},
-          {title: '🍳 Kitchen Cabinets', value: 'kitchen-cabinets'},
-          {title: '🪨 Kitchen Countertops', value: 'kitchen-countertops'},
-          {title: '🛁 Bathroom Remodel', value: 'bathroom-remodel'},
+          {title: 'Homepage', value: 'homepage'},
+          {title: 'Kitchen Cabinets', value: 'kitchen-cabinets'},
+          {title: 'Kitchen Countertops', value: 'kitchen-countertops'},
+          {title: 'Bathroom Remodel', value: 'bathroom-remodel'},
         ],
       },
       validation: (Rule) => Rule.required().min(1),
     }),
     defineField({
       name: 'order',
-      title: 'Sort Order',
+      title: 'Sort order',
       type: 'number',
-      description: 'Lower = appears first',
+      description: 'Lower numbers show first.',
       group: 'basic',
       initialValue: 0,
     }),
@@ -312,7 +315,7 @@ export default defineType({
     }),
   ],
   orderings: [
-    {title: 'Sort Order', name: 'orderAsc', by: [{field: 'order', direction: 'asc'}]},
+    {title: 'Sort order', name: 'orderAsc', by: [{field: 'order', direction: 'asc'}]},
     {
       title: 'Newest First',
       name: 'completedDesc',
@@ -329,7 +332,7 @@ export default defineType({
     prepare({title, media, pages, city}) {
       const subtitleParts = []
       if (city) subtitleParts.push(city)
-      if (pages && pages.length) subtitleParts.push(pages.join(', '))
+      if (pages && pages.length) subtitleParts.push(poolNames(pages))
       return {
         title,
         subtitle: subtitleParts.join(' · '),

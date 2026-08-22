@@ -1,4 +1,5 @@
 import {defineField, defineType} from 'sanity'
+import {DocumentIcon} from '@sanity/icons'
 
 // Universal SEO page: services, sub-services, city pages and hubs.
 // URL = parent's URL + "/" + slug. With no parent the page lives at the root
@@ -14,8 +15,9 @@ const imageWithAlt = {
 
 export default defineType({
   name: 'page',
-  title: 'SEO Page',
+  title: 'Page',
   type: 'document',
+  icon: DocumentIcon,
   groups: [
     {name: 'content', title: 'Content', default: true},
     {name: 'seo', title: 'SEO'},

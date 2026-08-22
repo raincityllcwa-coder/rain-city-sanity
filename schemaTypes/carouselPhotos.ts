@@ -1,4 +1,5 @@
 import {defineField, defineType} from 'sanity'
+import {ImagesIcon} from '@sanity/icons'
 
 // Photos of the three auto-rotating service carousels on the homepage.
 // One document (id carousel-photos), three photo grids. Order in the grid =
@@ -22,13 +23,13 @@ const photoGrid = (name: string, title: string) =>
 
 export default defineType({
   name: 'carouselPhotos',
-  title: 'Carousel Photos (Homepage)',
+  title: 'Home: services cards photos',
   type: 'document',
-  __experimental_actions: ['update', 'publish'],
+  icon: ImagesIcon,
   fields: [
     photoGrid('cabinets', 'Kitchen Renovation & Cabinets'),
     photoGrid('countertops', 'Kitchen Countertops'),
     photoGrid('bathroom', 'Bathroom Remodel'),
   ],
-  preview: {prepare: () => ({title: 'Carousel Photos (Homepage)'})},
+  preview: {prepare: () => ({title: 'Home: services cards photos'})},
 })

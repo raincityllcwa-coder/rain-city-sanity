@@ -1,11 +1,12 @@
 import {defineField, defineType} from 'sanity'
+import {TextIcon} from '@sanity/icons'
 
 // About Us texts shown on the homepage About section. Single document, id copy.about.
 export default defineType({
   name: 'aboutCopy',
-  title: 'About Us Texts',
+  title: 'Home: About block',
   type: 'document',
-  __experimental_actions: ['update', 'publish'],
+  icon: TextIcon,
   fields: [
     defineField({name: 'heading', title: 'Section heading', type: 'string'}),
     defineField({name: 'introParagraph1', title: 'Intro paragraph 1', type: 'text', rows: 5}),
@@ -18,5 +19,5 @@ export default defineType({
     defineField({name: 'officeHeading', title: 'Office heading', type: 'string'}),
     defineField({name: 'officeParagraph', title: 'Office paragraph', type: 'text', rows: 4}),
   ],
-  preview: {prepare: () => ({title: 'About Us Texts'})},
+  preview: {prepare: () => ({title: 'Home: About block'})},
 })

@@ -1,20 +1,22 @@
 import {defineField, defineType} from 'sanity'
+import {TextIcon} from '@sanity/icons'
+import {pageLabel} from './labels'
 
 // Unique copy of the three service pages. Fixed ids:
 // service.kitchen-cabinets, service.kitchen-countertops, service.bathroom-remodel.
 export default defineType({
   name: 'serviceCopy',
-  title: 'Service Page Texts',
+  title: 'Service page: texts and photos',
   type: 'document',
-  __experimental_actions: ['update', 'publish'],
+  icon: TextIcon,
   fields: [
     defineField({name: 'serviceKey', title: 'Page', type: 'string', readOnly: true}),
-    defineField({name: 'heroTitle', title: 'Hero H1', type: 'string'}),
-    defineField({name: 'heroSubtitle', title: 'Hero subtitle', type: 'text', rows: 2}),
+    defineField({name: 'heroTitle', title: 'Headline (H1)', type: 'string'}),
+    defineField({name: 'heroSubtitle', title: 'Subtitle', type: 'text', rows: 2}),
     defineField({name: 'contentTitle', title: 'Content section heading', type: 'string'}),
     defineField({name: 'contentParagraphs', title: 'Content section paragraphs', type: 'array', of: [{type: 'text', rows: 4}]}),
     defineField({
-      name: 'heroImage', title: 'Hero photo (page top background)', type: 'image', options: {hotspot: true},
+      name: 'heroImage', title: 'Background photo behind the headline', type: 'image', options: {hotspot: true},
       description: 'Large photo behind the page title. Landscape, 1600px wide or more.',
       fields: [defineField({name: 'alt', title: 'Alt Text (SEO)', type: 'string'})],
     }),
@@ -30,5 +32,8 @@ export default defineType({
       of: [{type: 'image', options: {hotspot: true}, fields: [defineField({name: 'alt', title: 'Alt Text (SEO)', type: 'string'})]}],
     }),
   ],
-  preview: {select: {title: 'serviceKey', subtitle: 'heroTitle'}},
+  preview: {
+    select: {key: 'serviceKey', subtitle: 'heroTitle'},
+    prepare: ({key, subtitle}) => ({title: pageLabel(key), subtitle}),
+  },
 })
