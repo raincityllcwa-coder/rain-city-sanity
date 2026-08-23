@@ -11,6 +11,7 @@ import contactPage from './contactPage'
 import hubPage from './hubPage'
 import servicePage from './servicePage'
 import cityPage from './cityPage'
+import city from './city'
 // Old copy layer, superseded by the page documents above. Kept registered
 // until the old documents are removed (phase 4), never shown in the Studio.
 import page from './page'
@@ -22,7 +23,7 @@ import carouselPhotos from './carouselPhotos'
 
 export const schemaTypes = [
   homePage, aboutPage, contactPage, hubPage, servicePage, cityPage,
-  project, review, faq,
+  project, review, faq, city,
   siteSettings, navigation, sharedCopy, redirect,
   page, pageMeta, homeCopy, aboutCopy, serviceCopy, carouselPhotos,
 ]

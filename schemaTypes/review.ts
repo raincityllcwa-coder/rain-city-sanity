@@ -94,11 +94,21 @@ export default defineType({
       },
     }),
     defineField({
-      name: 'city',
+      name: 'cityRef',
       title: 'City (optional)',
+      type: 'reference',
+      to: [{type: 'city'}],
+      group: 'placement',
+      description: 'City pages show reviews from their own city first.',
+    }),
+    defineField({
+      name: 'city',
+      title: 'City (old)',
       type: 'string',
       group: 'placement',
-      description: 'Example: Kirkland. City pages show reviews from their own city first.',
+      deprecated: {reason: 'Replaced by the City reference above.'},
+      readOnly: true,
+      hidden: ({value}) => value === undefined,
     }),
     defineField({
       name: 'order',

@@ -37,7 +37,13 @@ export default defineType({
     ...seoFields('seo'),
     ...seoUrlFields('seo'),
 
-    defineField({name: 'city', title: 'City name', type: 'string', group: 'settings', description: 'Example: Kirkland. Used for schema.org areaServed and to pull reviews and projects from this city.', validation: (r) => r.required()}),
+    defineField({name: 'cityRef', title: 'City', type: 'reference', to: [{type: 'city'}], group: 'settings', description: 'Used for schema.org areaServed and to pull reviews and projects from this city.', validation: (r) => r.required()}),
+    defineField({
+      name: 'nearbyCities', title: 'Nearby cities', type: 'array', group: 'blocks',
+      description: 'Shown as a links block. Only cities that already have a published page become links; the rest are skipped.',
+      of: [{type: 'reference', to: [{type: 'city'}]}],
+    }),
+    defineField({name: 'city', title: 'City name (old)', type: 'string', group: 'settings', deprecated: {reason: 'Replaced by the City reference above.'}, readOnly: true, hidden: ({value}) => value === undefined}),
     slugField('settings'),
     defineField({name: 'parent', title: 'Parent page', type: 'reference', group: 'settings', to: [{type: 'hubPage'}], description: 'Optional. Nests this page under a hub: URL becomes parent/slug and breadcrumbs follow.'}),
   ],

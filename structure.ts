@@ -1,6 +1,7 @@
 import type {DefaultDocumentNodeResolver, StructureBuilder, StructureResolver} from 'sanity/structure'
 import {
   BlockContentIcon,
+  EarthGlobeIcon,
   CogIcon,
   DocumentsIcon,
   EnvelopeIcon,
@@ -79,6 +80,7 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem('project').title('Projects').icon(ImagesIcon),
       S.documentTypeListItem('review').title('Reviews').icon(StarIcon),
       S.documentTypeListItem('faq').title('FAQ').icon(HelpCircleIcon),
+      S.documentTypeListItem('city').title('Cities').icon(EarthGlobeIcon),
       S.divider(),
       fixed(S, 'siteSettings', 'siteSettings', 'Site Settings', CogIcon),
       fixed(S, 'navigation', 'navigation', 'Header and Footer', MenuIcon),

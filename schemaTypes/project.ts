@@ -98,8 +98,16 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'cityRef',
+      title: 'City (for city pages)',
+      type: 'reference',
+      to: [{type: 'city'}],
+      group: 'basic',
+      description: 'City pages pull projects by this field.',
+    }),
+    defineField({
       name: 'city',
-      title: 'City / Location',
+      title: 'Location label (shown on cards)',
       type: 'string',
       description: 'E.g. "South Seattle, WA"',
       group: 'basic',

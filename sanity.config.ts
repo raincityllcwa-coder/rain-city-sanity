@@ -11,7 +11,7 @@ const FIXED_TYPES = ['homePage', 'aboutPage', 'contactPage', 'hubPage', 'siteSet
   'carouselPhotos', 'homeCopy', 'aboutCopy', 'pageMeta', 'serviceCopy']
 
 // What the global "Create new" button offers.
-const GLOBAL_CREATE = ['servicePage', 'cityPage', 'project', 'review', 'faq', 'redirect']
+const GLOBAL_CREATE = ['servicePage', 'cityPage', 'project', 'review', 'faq', 'city', 'redirect']
 
 export default defineConfig({
   name: 'rain-city',
