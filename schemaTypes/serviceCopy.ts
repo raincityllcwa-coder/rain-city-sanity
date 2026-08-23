@@ -1,6 +1,5 @@
 import {defineField, defineType} from 'sanity'
 import {TextIcon} from '@sanity/icons'
-import {pageLabel} from './labels'
 
 // Unique copy of the three service pages. Fixed ids:
 // service.kitchen-cabinets, service.kitchen-countertops, service.bathroom-remodel.
@@ -34,6 +33,6 @@ export default defineType({
   ],
   preview: {
     select: {key: 'serviceKey', subtitle: 'heroTitle'},
-    prepare: ({key, subtitle}) => ({title: pageLabel(key), subtitle}),
+    prepare: ({key, subtitle}) => ({title: `${key} (old)`, subtitle}),
   },
 })

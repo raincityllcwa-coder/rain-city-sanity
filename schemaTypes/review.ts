@@ -1,6 +1,5 @@
 import {defineField, defineType} from 'sanity'
 import {StarIcon} from '@sanity/icons'
-import {poolNames} from './labels'
 
 export default defineType({
   name: 'review',
@@ -62,11 +61,29 @@ export default defineType({
       description: 'Older way of adding an avatar. Upload the avatar above instead.',
     }),
     defineField({
+      name: 'services',
+      title: 'Service pages',
+      type: 'array',
+      group: 'placement',
+      description: 'The service pages this review appears on.',
+      of: [{type: 'reference', to: [{type: 'servicePage'}]}],
+    }),
+    defineField({
+      name: 'showOnHomepage',
+      title: 'Show on the homepage',
+      type: 'boolean',
+      group: 'placement',
+      initialValue: false,
+    }),
+    defineField({
       name: 'showOn',
-      title: 'Show on pages',
+      title: 'Show on pages (old)',
       type: 'array',
       group: 'placement',
       of: [{type: 'string'}],
+      deprecated: {reason: 'Replaced by Service pages and Show on the homepage above.'},
+      readOnly: true,
+      hidden: ({value}) => value === undefined,
       options: {
         list: [
           {title: 'Homepage', value: 'homepage'},
@@ -75,7 +92,6 @@ export default defineType({
           {title: 'Bathroom Remodel', value: 'bathroom-remodel'},
         ],
       },
-      validation: (Rule) => Rule.required().min(1),
     }),
     defineField({
       name: 'city',
@@ -100,13 +116,16 @@ export default defineType({
     select: {
       title: 'author',
       text: 'text',
-      pages: 'showOn',
       city: 'city',
+      home: 'showOnHomepage',
+      s0: 'services.0.cardTitle',
+      s1: 'services.1.cardTitle',
+      s2: 'services.2.cardTitle',
       avatar: 'avatarUpload',
       photo: 'photoUpload',
     },
-    prepare({title, text, pages, city, avatar, photo}) {
-      const where = [city, poolNames(pages)].filter(Boolean).join(' · ')
+    prepare({title, text, city, home, s0, s1, s2, avatar, photo}) {
+      const where = [city, home ? 'Homepage' : null, s0, s1, s2].filter(Boolean).join(' · ')
       return {
         title,
         subtitle: where || (text || '').slice(0, 60),

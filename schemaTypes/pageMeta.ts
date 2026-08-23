@@ -1,6 +1,5 @@
 import {defineField, defineType} from 'sanity'
 import {SearchIcon} from '@sanity/icons'
-import {pageLabel} from './labels'
 
 // Meta title/description overrides for the existing static pages.
 // One document per page, created with fixed ids (meta.home, meta.about, ...).
@@ -17,6 +16,6 @@ export default defineType({
   ],
   preview: {
     select: {key: 'pageKey', subtitle: 'metaTitle'},
-    prepare: ({key, subtitle}) => ({title: `${pageLabel(key)}: SEO`, subtitle}),
+    prepare: ({key, subtitle}) => ({title: `${key}: SEO (old)`, subtitle}),
   },
 })

@@ -2,14 +2,14 @@ import {defineField, defineType} from 'sanity'
 import {MenuIcon} from '@sanity/icons'
 
 // Site navigation, one document (id navigation). Each item is either a link
-// to a page document (URL computed automatically) or a plain URL for the
-// built-in pages (/kitchen-cabinets, /our-projects, ...).
+// to a service or city page (URL computed automatically) or a plain URL for
+// the fixed pages (/, /about, /contact, /our-services, /our-projects).
 const navItem = {
   type: 'object',
   fields: [
     defineField({name: 'label', title: 'Label', type: 'string', validation: (r) => r.required()}),
-    defineField({name: 'page', title: 'Page added in Sanity', type: 'reference', to: [{type: 'page'}], description: 'Pick a page document, or leave empty and use the URL below.'}),
-    defineField({name: 'href', title: 'URL (for built-in pages)', type: 'string', description: 'Example: /kitchen-cabinets. Ignored if a page is picked above.'}),
+    defineField({name: 'page', title: 'Service or city page', type: 'reference', to: [{type: 'servicePage'}, {type: 'cityPage'}], description: 'Pick a page, or leave empty and use the URL below for Home, About, Contact, Our Services, Our Projects.'}),
+    defineField({name: 'href', title: 'URL (for built-in pages)', type: 'string', description: 'Example: /our-projects. Ignored if a page is picked above.'}),
   ],
   preview: {select: {title: 'label', page: 'page.slug.current', href: 'href'}, prepare: ({title, page, href}: any) => ({title, subtitle: page ? `page: ${page}` : href || ''})},
 }
@@ -39,8 +39,8 @@ export default defineType({
     }),
     defineField({name: 'footerServices', title: 'Services column', type: 'array', group: 'footer', of: [navItem], description: 'Leave empty to keep the built-in three links.'}),
     defineField({name: 'footerCities', title: 'Service Area column (main cities)', type: 'array', group: 'footer', of: [navItem], description: 'The 8 to 12 main cities. Linked from every page, so they carry the most internal-link weight. Leave empty to keep the built-in text list.'}),
-    defineField({name: 'areasBlockTitle', title: '"Areas we serve" block: heading', type: 'string', group: 'blocks', initialValue: 'Areas We Serve', description: 'The block with links to city pages, shown on pages added in Sanity.'}),
-    defineField({name: 'servicesBlockTitle', title: '"Our services" block: heading', type: 'string', group: 'blocks', initialValue: 'Our Remodeling Services', description: 'The block with links to service pages, shown on pages added in Sanity.'}),
+    defineField({name: 'areasBlockTitle', title: '"Areas we serve" block: heading', type: 'string', group: 'blocks', initialValue: 'Areas We Serve', description: 'The block with links to city pages on service pages.'}),
+    defineField({name: 'servicesBlockTitle', title: '"Our services" block: heading', type: 'string', group: 'blocks', initialValue: 'Our Remodeling Services', description: 'The block with links to service pages on city pages.'}),
   ],
   preview: {prepare: () => ({title: 'Header and Footer'})},
 })

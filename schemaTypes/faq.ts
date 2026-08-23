@@ -1,6 +1,5 @@
 import {defineField, defineType} from 'sanity'
 import {HelpCircleIcon} from '@sanity/icons'
-import {poolNames} from './labels'
 
 export default defineType({
   name: 'faq',
@@ -23,9 +22,12 @@ export default defineType({
     }),
     defineField({
       name: 'showOn',
-      title: 'Show on pages',
+      title: 'Show on pages (old)',
       type: 'array',
       of: [{type: 'string'}],
+      deprecated: {reason: 'Questions are now picked on each page (Blocks tab, FAQ).'},
+      readOnly: true,
+      hidden: ({value}) => value === undefined,
       options: {
         list: [
           {title: 'Kitchen Cabinets', value: 'kitchen-cabinets'},
@@ -33,13 +35,14 @@ export default defineType({
           {title: 'Bathroom Remodel', value: 'bathroom-remodel'},
         ],
       },
-      validation: (Rule) => Rule.required().min(1),
     }),
     defineField({
       name: 'order',
-      title: 'Sort order',
+      title: 'Sort order (old)',
       type: 'number',
-      description: 'Lower numbers show first.',
+      deprecated: {reason: 'Order is now set by dragging questions on each page.'},
+      readOnly: true,
+      hidden: ({value}) => value === undefined,
       initialValue: 0,
     }),
   ],
@@ -49,13 +52,7 @@ export default defineType({
   preview: {
     select: {
       title: 'question',
-      pages: 'showOn',
-    },
-    prepare({title, pages}) {
-      return {
-        title,
-        subtitle: poolNames(pages),
-      }
+      subtitle: 'answer',
     },
   },
 })

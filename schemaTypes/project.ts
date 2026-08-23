@@ -1,6 +1,5 @@
 import {defineField, defineType} from 'sanity'
 import {ImagesIcon} from '@sanity/icons'
-import {poolNames} from './labels'
 
 export default defineType({
   name: 'project',
@@ -44,11 +43,29 @@ export default defineType({
       group: 'basic',
     }),
     defineField({
+      name: 'services',
+      title: 'Service pages',
+      type: 'array',
+      group: 'basic',
+      description: 'The service pages this project appears on.',
+      of: [{type: 'reference', to: [{type: 'servicePage'}]}],
+    }),
+    defineField({
+      name: 'showOnHomepage',
+      title: 'Show on the homepage',
+      type: 'boolean',
+      group: 'basic',
+      initialValue: false,
+    }),
+    defineField({
       name: 'showOn',
-      title: 'Show on pages',
+      title: 'Show on pages (old)',
       type: 'array',
       of: [{type: 'string'}],
       group: 'basic',
+      deprecated: {reason: 'Replaced by Service pages and Show on the homepage above.'},
+      readOnly: true,
+      hidden: ({value}) => value === undefined,
       options: {
         list: [
           {title: 'Homepage', value: 'homepage'},
@@ -57,7 +74,6 @@ export default defineType({
           {title: 'Bathroom Remodel', value: 'bathroom-remodel'},
         ],
       },
-      validation: (Rule) => Rule.required().min(1),
     }),
     defineField({
       name: 'order',
@@ -326,13 +342,14 @@ export default defineType({
     select: {
       title: 'title',
       media: 'mainImage',
-      pages: 'showOn',
       city: 'city',
+      home: 'showOnHomepage',
+      s0: 'services.0.cardTitle',
+      s1: 'services.1.cardTitle',
+      s2: 'services.2.cardTitle',
     },
-    prepare({title, media, pages, city}) {
-      const subtitleParts = []
-      if (city) subtitleParts.push(city)
-      if (pages && pages.length) subtitleParts.push(poolNames(pages))
+    prepare({title, media, city, home, s0, s1, s2}) {
+      const subtitleParts = [city, home ? 'Homepage' : null, s0, s1, s2].filter(Boolean)
       return {
         title,
         subtitle: subtitleParts.join(' · '),

@@ -2,17 +2,16 @@ import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
-import {structure, defaultDocumentNode, poolTemplates} from './structure'
+import {structure, defaultDocumentNode, pageTemplates} from './structure'
 
-// Fixed documents (one per type, or one per page key) that the site reads by
-// a known id. They can be edited and published, but never unpublished,
-// deleted or duplicated from the Studio: unpublishing one silently makes the
-// site fall back to its built-in content.
-const FIXED_TYPES = ['siteSettings', 'navigation', 'carouselPhotos', 'homeCopy', 'sharedCopy', 'aboutCopy', 'pageMeta', 'serviceCopy']
+// Fixed documents the site reads by a known id. They can be edited and
+// published, but never unpublished, deleted or duplicated from the Studio.
+const FIXED_TYPES = ['homePage', 'aboutPage', 'contactPage', 'hubPage', 'siteSettings', 'navigation', 'sharedCopy',
+  // old copy layer, kept until phase 4
+  'carouselPhotos', 'homeCopy', 'aboutCopy', 'pageMeta', 'serviceCopy']
 
-// What the global "Create new" button offers. Page-specific templates
-// (review for Kitchen Cabinets, ...) are reachable from the page lists only.
-const GLOBAL_CREATE = ['project', 'review', 'faq', 'redirect', 'page-service', 'page-city', 'page-hub']
+// What the global "Create new" button offers.
+const GLOBAL_CREATE = ['servicePage', 'cityPage', 'project', 'review', 'faq', 'redirect']
 
 export default defineConfig({
   name: 'rain-city',
@@ -22,13 +21,7 @@ export default defineConfig({
   plugins: [structureTool({structure, defaultDocumentNode}), visionTool()],
   schema: {
     types: schemaTypes,
-    templates: (prev) => [
-      ...prev.filter((t) => t.schemaType !== 'page'),
-      {id: 'page-service', title: 'Service page', schemaType: 'page', value: {pageType: 'service'}},
-      {id: 'page-city', title: 'City page', schemaType: 'page', value: {pageType: 'city', showRelatedServices: true}},
-      {id: 'page-hub', title: 'Hub page', schemaType: 'page', value: {pageType: 'hub'}},
-      ...poolTemplates,
-    ],
+    templates: (prev) => [...prev, ...pageTemplates],
   },
   document: {
     actions: (prev, context) =>

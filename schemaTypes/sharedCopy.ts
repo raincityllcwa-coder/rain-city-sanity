@@ -9,17 +9,17 @@ export default defineType({
   type: 'document',
   icon: BlockContentIcon,
   groups: [
-    {name: 'services', title: 'Services cards', default: true},
-    {name: 'why', title: 'Why Choose Us'},
+    {name: 'why', title: 'Why Choose Us', default: true},
     {name: 'process', title: 'Process'},
     {name: 'additional', title: 'Additional services'},
     {name: 'area', title: 'Service area'},
+    {name: 'services', title: 'Old fields'},
   ],
   fields: [
-    defineField({name: 'servicesHeading', title: 'Heading', type: 'string', group: 'services', description: 'Above the three service cards on the homepage.'}),
+    defineField({name: 'servicesHeading', title: 'Heading (old)', type: 'string', group: 'services', deprecated: {reason: 'Moved to Home > Services.'}, readOnly: true, hidden: ({value}) => value === undefined}),
     defineField({
-      name: 'serviceCards', title: 'Three cards', type: 'array', group: 'services',
-      description: 'Card order matches the homepage. Card photos are in Home > Services cards: carousel photos.',
+      name: 'serviceCards', title: 'Three cards (old)', type: 'array', group: 'services',
+      deprecated: {reason: 'Moved to the Card tab of each service page.'}, readOnly: true, hidden: ({value}) => value === undefined,
       of: [{
         type: 'object',
         fields: [

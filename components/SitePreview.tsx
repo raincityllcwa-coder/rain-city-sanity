@@ -18,15 +18,16 @@ export default function SitePreview(props: {document: {displayed: any}}) {
     let alive = true
     const resolve = async () => {
       switch (doc._type) {
-        case 'homeCopy':
-        case 'aboutCopy':
-        case 'carouselPhotos':
+        case 'homePage':
           return '/'
-        case 'serviceCopy':
-          return keyToPath(doc.serviceKey)
-        case 'pageMeta':
-          return keyToPath(doc.pageKey)
-        case 'page': {
+        case 'aboutPage':
+          return '/about'
+        case 'contactPage':
+          return '/contact'
+        case 'hubPage':
+          return keyToPath(doc.hubKey)
+        case 'servicePage':
+        case 'cityPage': {
           const own = doc.slug?.current
           if (!own) return null
           const segments = [own]
@@ -50,7 +51,7 @@ export default function SitePreview(props: {document: {displayed: any}}) {
     return () => {
       alive = false
     }
-  }, [doc._type, doc.serviceKey, doc.pageKey, doc.slug?.current, doc.parent?._ref, client])
+  }, [doc._type, doc.hubKey, doc.slug?.current, doc.parent?._ref, client])
 
   if (!path) {
     return (
