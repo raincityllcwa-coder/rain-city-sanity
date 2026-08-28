@@ -37,6 +37,11 @@ export default defineType({
         preview: {select: {title: 'group'}},
       }],
     }),
+    defineField({
+      name: 'citiesMenu', title: 'Service Areas dropdown', type: 'array', group: 'header',
+      description: 'Cities shown in the Service Areas dropdown, one flat level. Leave empty to hide the menu item.',
+      of: [navItem],
+    }),
     defineField({name: 'footerServices', title: 'Services column', type: 'array', group: 'footer', of: [navItem], description: 'Leave empty to keep the built-in three links.'}),
     defineField({name: 'footerCities', title: 'Service Area column (main cities)', type: 'array', group: 'footer', of: [navItem], description: 'The 8 to 12 main cities. Linked from every page, so they carry the most internal-link weight. Leave empty to keep the built-in text list.'}),
     defineField({name: 'areasBlockTitle', title: '"Areas we serve" block: heading', type: 'string', group: 'blocks', initialValue: 'Areas We Serve', description: 'The block with links to city pages on service pages.'}),
