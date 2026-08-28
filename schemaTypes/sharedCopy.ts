@@ -13,6 +13,7 @@ export default defineType({
     {name: 'process', title: 'Process'},
     {name: 'additional', title: 'Additional services'},
     {name: 'area', title: 'Service area'},
+    {name: 'city', title: 'City pages'},
     {name: 'services', title: 'Old fields'},
   ],
   fields: [
@@ -44,6 +45,32 @@ export default defineType({
         preview: {select: {title: 'title'}},
       }],
       validation: (r) => r.max(4),
+    }),
+    defineField({
+      name: 'cityHeroChecks', title: 'Hero: three trust lines', type: 'array', group: 'city',
+      description: 'Shown with check marks under the headline on every city page.',
+      of: [{type: 'string'}],
+      validation: (r) => r.max(3),
+    }),
+    defineField({name: 'cityWhyHeading', title: 'Why us: heading', type: 'string', group: 'city'}),
+    defineField({
+      name: 'cityWhyItems', title: 'Why us: four points', type: 'array', group: 'city',
+      of: [{
+        type: 'object',
+        fields: [
+          defineField({name: 'title', title: 'Title', type: 'string'}),
+          defineField({name: 'description', title: 'Text', type: 'text', rows: 3}),
+        ],
+        preview: {select: {title: 'title'}},
+      }],
+      validation: (r) => r.max(4),
+    }),
+    defineField({name: 'citySamplesHeading', title: 'Samples block: heading', type: 'string', group: 'city'}),
+    defineField({name: 'citySamplesText', title: 'Samples block: text', type: 'text', rows: 3, group: 'city', description: 'The office address and hours are added automatically from Site Settings.'}),
+    defineField({
+      name: 'citySamplesPhoto', title: 'Samples block: photo', type: 'image', group: 'city',
+      options: {hotspot: true},
+      fields: [defineField({name: 'alt', title: 'Alt Text (SEO)', type: 'string'})],
     }),
     defineField({name: 'processHeadingHome', title: 'Heading on the homepage', type: 'string', group: 'process'}),
     defineField({name: 'processHeadingService', title: 'Heading on service pages', type: 'string', group: 'process'}),

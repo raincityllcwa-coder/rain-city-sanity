@@ -2,9 +2,10 @@ import {defineArrayMember, defineField, defineType} from 'sanity'
 import {PinIcon} from '@sanity/icons'
 import {bodyField, faqsField, galleryField, imageField, pagePreview, seoFields, seoUrlFields, slugField, toggle} from './shared'
 
-// City page: Kitchen and Bathroom Remodeling in {City}, WA. The city-specific
-// blocks (at a glance, neighborhoods, nearby cities) are added once the
-// Kirkland prototype is approved.
+// City page: Kitchen and Bathroom Remodeling in {City}, WA. Built from the
+// approved Kirkland prototype: hero with the docked form, intro with a city
+// photo, service cards, city-first projects and reviews, the shared samples /
+// why / process blocks, Working in the city notes, nearby cities and FAQ.
 export default defineType({
   name: 'cityPage',
   title: 'City page',
@@ -20,7 +21,16 @@ export default defineType({
     defineField({name: 'title', title: 'Headline (H1)', type: 'string', group: 'content', validation: (r) => r.required()}),
     defineField({name: 'subtitle', title: 'Subtitle', type: 'text', rows: 2, group: 'content'}),
     imageField('heroImage', 'Background photo behind the headline', 'content', 'Landscape, 1600px wide or more.'),
-    bodyField('content'),
+    defineField({name: 'introTitle', title: 'Intro heading (H2)', type: 'string', group: 'content', description: 'City + service for SEO. Empty = "Your Kitchen and Bathroom Remodeling Contractor in {City}".'}),
+    bodyField('content', 'Intro text'),
+    defineField({
+      name: 'cityPhoto', title: 'City photo (below the intro text)', type: 'image', group: 'content',
+      options: {hotspot: true},
+      fields: [
+        defineField({name: 'alt', title: 'Alt Text (SEO)', type: 'string'}),
+        defineField({name: 'caption', title: 'Caption', type: 'string', description: 'Shown under the photo. Keep the author credit here if the photo license requires attribution.'}),
+      ],
+    }),
     galleryField('content'),
 
     defineField({
@@ -29,9 +39,25 @@ export default defineType({
       of: [defineArrayMember({type: 'reference', to: [{type: 'servicePage'}]})],
     }),
     faqsField('blocks'),
+    defineField({
+      name: 'localNotes', title: 'Working in the city: points', type: 'array', group: 'blocks',
+      description: 'Short local facts: older homes, permits, living at home during the work, deliveries and debris. Bold lead + text.',
+      of: [defineArrayMember({
+        type: 'object',
+        fields: [
+          defineField({name: 'title', title: 'Bold lead', type: 'string'}),
+          defineField({name: 'text', title: 'Text', type: 'text', rows: 3}),
+        ],
+        preview: {select: {title: 'title'}},
+      })],
+    }),
     toggle('showReviews', 'Reviews', 'blocks', 'Reviews from this city first, then the rest.'),
     toggle('showProjects', 'Projects', 'blocks', 'Projects from this city first, then the rest.'),
     toggle('showRelatedServices', 'Our services (links to service pages)', 'blocks'),
+    toggle('showSamples', 'The samples come to you', 'blocks', 'Shared block: texts and the photo live in Shared Sections.'),
+    toggle('showWhyChooseUs', 'Why choose us', 'blocks', 'Shared block: texts live in Shared Sections.'),
+    toggle('showProcess', 'Process', 'blocks', 'Shared block: the four steps live in Shared Sections.'),
+    toggle('showWorking', 'Working in the city', 'blocks', 'The points above plus the owner card from Site Settings.'),
     toggle('showLeadForm', 'Lead form', 'blocks'),
 
     ...seoFields('seo'),
