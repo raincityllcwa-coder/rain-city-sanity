@@ -40,6 +40,11 @@ export default defineType({
     }),
     faqsField('blocks'),
     defineField({
+      name: 'seoTextTitle', title: 'SEO text heading (H2)', type: 'string', group: 'content',
+      description: 'Optional heading above the SEO text block.',
+    }),
+    bodyField('content', 'SEO text (before FAQ)', 'seoText'),  // own section, default position before FAQ, empty = hidden
+    defineField({
       name: 'localNotes', title: 'Working in the city: points', type: 'array', group: 'blocks',
       description: 'Short local facts: older homes, permits, living at home during the work, deliveries and debris. Bold lead + text.',
       of: [defineArrayMember({
@@ -67,6 +72,7 @@ export default defineType({
         {title: 'Process', value: 'process'},
         {title: 'Working in the city', value: 'working'},
         {title: 'Nearby cities', value: 'nearby'},
+        {title: 'SEO text', value: 'seo'},
         {title: 'FAQ', value: 'faq'},
       ]},
       validation: (r) => r.unique(),

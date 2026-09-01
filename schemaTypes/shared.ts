@@ -24,9 +24,9 @@ export const photoGridField = (name: string, title: string, group: string, descr
   })
 
 // Rich text for page bodies: headings, lists, bold, italic, links, photos.
-export const bodyField = (group: string, title = 'Page text') =>
+export const bodyField = (group: string, title = 'Page text', name = 'body') =>
   defineField({
-    name: 'body',
+    name,
     title,
     type: 'array',
     group,
