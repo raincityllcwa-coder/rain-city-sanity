@@ -60,9 +60,8 @@ export default defineType({
     toggle('showProjects', 'Projects', 'blocks', 'Projects from this city first, then the rest.'),
     defineField({
       name: 'sectionOrder', title: 'Section order', type: 'array', group: 'blocks',
-      description: 'Drag to reorder the page blocks between the hero and the bottom form. Empty = the default order. The toggles below still show or hide each block.',
-      of: [defineArrayMember({type: 'string'})],
-      options: {list: [
+      description: 'The page blocks between the hero and the bottom form, top to bottom. Drag a row by the handle on its left to move it, pick the block in the dropdown, Add item adds a row, the row menu (...) removes one. Empty list = the default order. The toggles below still show or hide each block.',
+      of: [defineArrayMember({type: 'string', options: {list: [
         {title: 'Intro', value: 'intro'},
         {title: 'Services', value: 'services'},
         {title: 'Projects', value: 'projects'},
@@ -74,8 +73,8 @@ export default defineType({
         {title: 'Nearby cities', value: 'nearby'},
         {title: 'SEO text', value: 'seo'},
         {title: 'FAQ', value: 'faq'},
-      ]},
-      validation: (r) => r.unique(),
+      ]}})],
+      validation: (r) => r.unique().custom((v) => ((v || []) as unknown[]).some((x) => !x) ? 'Pick a block in every row' : true),
     }),
     toggle('showRelatedServices', 'Our services (links to service pages)', 'blocks'),
     toggle('showSamples', 'The samples come to you', 'blocks', 'Shared block: texts and the photo live in Shared Sections.'),

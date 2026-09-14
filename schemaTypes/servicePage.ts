@@ -120,9 +120,8 @@ export default defineType({
     faqsField('template'),
     defineField({
       name: 'sectionOrder', title: 'Section order', type: 'array', group: 'blocks',
-      description: 'Drag to reorder the blocks between the hero (with the form strip) and the SEO text. Empty = the default order. Blocks not in the list are not shown.',
-      of: [defineArrayMember({type: 'string'})],
-      options: {list: [
+      description: 'The blocks between the hero (with the form strip) and the SEO text, top to bottom. Drag a row by the handle on its left to move it, pick the block in the dropdown, Add item adds a row, the row menu (...) removes one. Empty list = the default order. A block that is not in the list is not shown.',
+      of: [defineArrayMember({type: 'string', options: {list: [
         {title: 'Intro with the carousel', value: 'intro'},
         {title: 'What is included', value: 'included'},
         {title: 'Benefit cards', value: 'benefits'},
@@ -136,8 +135,8 @@ export default defineType({
         {title: 'FAQ', value: 'faq'},
         {title: 'Service area (shared, map)', value: 'area'},
         {title: 'Bottom form', value: 'final'},
-      ]},
-      validation: (r) => r.unique(),
+      ]}})],
+      validation: (r) => r.unique().custom((v) => ((v || []) as unknown[]).some((x) => !x) ? 'Pick a block in every row' : true),
     }),
     toggle('showReviews', 'Reviews', 'blocks', 'Reviews that point at this service, then the homepage set.'),
     toggle('showProjects', 'Projects', 'blocks', 'Projects that point at this service (only when "Projects" is in the order).'),
