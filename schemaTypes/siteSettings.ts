@@ -52,8 +52,8 @@ export default defineType({
     defineField({name: 'instagramUrl', title: 'Instagram URL', type: 'url', group: 'company'}),
 
     defineField({name: 'googleReviewsUrl', title: 'Google reviews link', type: 'url', group: 'reviews'}),
-    defineField({name: 'reviewCount', title: 'Number of Google reviews', type: 'number', group: 'reviews', description: 'Shown as "5.0 (131 Google Reviews)" and in schema.org. Update when the count grows.'}),
-    defineField({name: 'rating', title: 'Rating', type: 'string', group: 'reviews', description: 'Example: 5.0'}),
+    defineField({name: 'reviewCount', title: 'Number of Google reviews', type: 'number', group: 'reviews', description: 'Shown in the header and hero counters, in schema.org and wherever a text uses {reviews} or {reviews+} (140 or 140+). Update when the count grows.'}),
+    defineField({name: 'rating', title: 'Rating', type: 'string', group: 'reviews', description: 'Example: 5.0. Also fills {rating} in texts.'}),
 
     defineField({name: 'ownerName', title: 'Name', type: 'string', group: 'owner'}),
     defineField({name: 'ownerRole', title: 'Role', type: 'string', group: 'owner'}),

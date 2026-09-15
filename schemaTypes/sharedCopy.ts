@@ -26,8 +26,11 @@ export default defineType({
     defineField({name: 'svcBeforeLabel', title: 'Label on the before photo', type: 'string', group: 'service', initialValue: 'Before'}),
     defineField({name: 'svcAfterLabel', title: 'Label on the after photo', type: 'string', group: 'service', initialValue: 'After'}),
     defineField({name: 'svcGalleryLink', title: 'Gallery link text', type: 'string', group: 'service', initialValue: 'All projects'}),
-    defineField({name: 'svcLinksKitchen', title: 'Links block: kitchen column heading', type: 'string', group: 'service', initialValue: 'Kitchen services'}),
-    defineField({name: 'svcLinksBathroom', title: 'Links block: bathroom column heading', type: 'string', group: 'service', initialValue: 'Bathroom services'}),
+    defineField({name: 'svcReviewsHeading', title: 'Reviews block: heading', type: 'string', group: 'service', initialValue: 'Our Happy Customers Say'}),
+    defineField({name: 'svcReviewsNote', title: 'Reviews block: line under the heading', type: 'string', group: 'service', initialValue: '{rating} on Google from {reviews+} reviews', description: 'Tokens {reviews}, {reviews+} and {rating} are filled from Site Settings (140, 140+, 5.0) and work in any text on the site. Leave empty to show no line.'}),
+    defineField({name: 'svcReviewsVisible', title: 'Reviews block: cards shown on the page', type: 'number', group: 'service', initialValue: 3, description: 'The rest open in the Read more window. Search engines see only the cards on the page.', validation: (r) => r.integer().min(1).max(12)}),
+    defineField({name: 'svcReviewsMore', title: 'Reviews block: Read more button', type: 'string', group: 'service', initialValue: 'Read More Reviews'}),
+    defineField({name: 'svcReviewsModalTitle', title: 'Reviews block: window title', type: 'string', group: 'service', initialValue: 'All Customer Reviews'}),
     defineField({name: 'servicesHeading', title: 'Heading (old)', type: 'string', group: 'services', deprecated: {reason: 'Moved to Home > Services.'}, readOnly: true, hidden: ({value}) => value === undefined}),
     defineField({
       name: 'serviceCards', title: 'Three cards (old)', type: 'array', group: 'services',
